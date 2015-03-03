@@ -5,7 +5,7 @@
  */
 package springdemo;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -18,19 +18,9 @@ public class DrawingApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    //Triangle triangle = new Triangle();
-
-        //XML Bean reads an xml file
-       // BeanFactory factory = new XmlBeanFactory(new FileSystemResource("spring.xml"));
-        
-        //Application Context does everything BeanFactory does plus more
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        //Triangle triangle = (Triangle) context.getBean("triangle");
-        //Circle circle = (Circle) context.getBean("circle");
-        //triangle.draw();
-        //circle.draw();
-        
-        Shape shape = (Shape) context.getBean("triangle");
+        AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        context.registerShutdownHook();
+        Shape shape = (Shape) context.getBean("circle");
         shape.draw();
     }
 
